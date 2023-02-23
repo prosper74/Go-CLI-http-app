@@ -11,10 +11,12 @@ func main() {
 	port := flag.Int("port", 8080, "the port to listen on")
 	flag.Parse()
 
-	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "Hello World!")
-	})
+	http.HandleFunc("/", handler)
 
 	fmt.Printf("Server listening on port %d\n", *port)
 	http.ListenAndServe(fmt.Sprintf(":%d", *port), nil)
+}
+
+func handler(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World!")
 }
